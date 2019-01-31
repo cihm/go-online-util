@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "oCH3J96RWvO8W4xjix47PModpio=",
+			"path": "golang.org/x/crypto/bcrypt",
+			"revision": "64072686203f69e3fd20143576b27200f18ab0fa",
+			"revisionTime": "2019-01-22T01:17:21Z"
+		},
+		{
+			"checksumSHA1": "oVPHWesOmZ02vLq2fglGvf+AMgk=",
+			"path": "golang.org/x/crypto/blowfish",
+			"revision": "64072686203f69e3fd20143576b27200f18ab0fa",
+			"revisionTime": "2019-01-22T01:17:21Z"
+		}
+	],
+	"rootPath": "go-online-util"
+}
