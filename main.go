@@ -5,13 +5,13 @@ import (
 	//"go-online-util/password"
 	//"go-online-util/facebook"
 	//"go-online-util/sendmail"
-	//"go-online-util/concurrent"
-	//"go-online-util/listener"
-	//"go-online-util/cron"
-	"go-online-util/timing"
+	"go-online-util/concurrent"
 	"os"
 	"os/signal"
 	"syscall"
+	//"go-online-util/listener"
+	//"go-online-util/cron"
+	// "go-online-util/timing"
 	//"go-online-util/nsq"
 	//"os"
 	///"os/signal"
@@ -33,7 +33,7 @@ func main() {
 		Timing example
 
 	*/
-	timing.Flow1()
+	//timing.Flow1()
 
 	/*
 		Cron example
@@ -59,7 +59,7 @@ func main() {
 	//example 2
 	//concurrent.WorkPoolFlow()
 	//example
-	//concurrent.AntFlow()
+	concurrent.AntFlow()
 
 	/*
 		Facebook example
