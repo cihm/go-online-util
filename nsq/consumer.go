@@ -71,7 +71,7 @@ func MakeConsumer(topic, channel string, config *nsq.Config,
 	// 連線到 NSQ 叢集，而不是單個 NSQ，這樣更安全與可靠。
 	// err := q.ConnectToNSQLookupd("127.0.0.1:4161")
 
-	err := consumer.ConnectToNSQD("127.0.0.1:4150")
+	err := consumer.ConnectToNSQD("xxxxx.yy.com:xfgr")
 	if err != nil {
 		log.Panic("Could not connect")
 	}
