@@ -3,6 +3,7 @@ package nsqexample
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	//"go-online-util/reflectinvoke"
 
@@ -15,6 +16,8 @@ import (
 	//"github.com/bitly/go-nsq"
 	nsq "github.com/nsqio/go-nsq"
 )
+
+var num *int
 
 //var reflectinvoker *reflectinvoke.Reflectinvoker
 var reflectinvoker *Reflectinvoker
@@ -44,7 +47,7 @@ func HandleJsonMessage(message *nsq.Message) error {
 	if err != nil {
 		return err
 	}
-	info := "HandleJsonMessage get a result\n"
+	info := strconv.Itoa(*num) + ":HandleJsonMessage get a result\n"
 	info += "raw:\n" + string(resultJson) + "\n"
 	info += "function: " + result.FuncName + " \n"
 	info += fmt.Sprintf("result: %v\n", result.Data)
@@ -58,20 +61,20 @@ func HandleJsonMessage(message *nsq.Message) error {
 
 func HandleStringMessage(message *nsq.Message) error {
 
-	fmt.Printf("HandleStringMessage get a message  %v\n\n", string(message.Body))
+	fmt.Printf(message.NSQDAddress+":HandleStringMessage get a message  %v\n\n", string(message.Body))
 	return nil
 }
 
 func MakeConsumer(topic, channel string, config *nsq.Config,
 	handle func(message *nsq.Message) error) {
-	consumer, _ := nsq.NewConsumer(topic, channel, config)
+	consumer, _ := nsq.NewConsumer(topic, channel+strconv.Itoa(*num), config)
 	consumer.AddHandler(nsq.HandlerFunc(handle))
 
 	// 待深入了解
 	// 連線到 NSQ 叢集，而不是單個 NSQ，這樣更安全與可靠。
 	// err := q.ConnectToNSQLookupd("127.0.0.1:4161")
 
-	err := consumer.ConnectToNSQD("xxxxx.yy.com:xfgr")
+	err := consumer.ConnectToNSQD("nothttp:30018")
 	if err != nil {
 		log.Panic("Could not connect")
 	}
@@ -88,8 +91,8 @@ func init() {
 	reflectinvoker.RegisterMethod(bar)
 }
 
-func Consumerflow() {
-
+func Consumerflow(_num *int) {
+	num = _num
 	config := nsq.NewConfig()
 	config.DefaultRequeueDelay = 0
 	config.MaxBackoffDuration = 20 * time.Millisecond

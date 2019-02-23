@@ -34,7 +34,7 @@ func init() {
 	**/
 	SMTPServer = "smtp.gmail.com"
 	//The receiver needs to be in slice as the receive supports multiple receiver
-	Receiver = []string{"g1007125goodman@gmail.com", "xyz@gmail.com", "larrypage@googlemail.com"}
+	Receiver = []string{"g1007125goodman@yahoo.com.tw", "g1007125goodman@gmail.com"}
 
 	Subject = "Testing HTLML Email from golang"
 	Message = `
@@ -96,7 +96,7 @@ func WriteEmail(dest []string, contentType, subject, bodyMessage string, sender 
 	}
 
 	header["To"] = receipient
-	header["Subject"] = subject
+	//header["Subject"] = subject
 	header["MIME-Version"] = "1.0"
 	header["Content-Type"] = fmt.Sprintf("%s; charset=\"utf-8\"", contentType)
 	header["Content-Transfer-Encoding"] = "quoted-printable"

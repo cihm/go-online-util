@@ -60,7 +60,7 @@ func Searchflow(serverUrl string) {
 		println(err.Error())
 	}
 	printEmployee(res, err)
-
+	fmt.Println("!total:", res.Hits.TotalHits)
 }
 
 func printEmployee(res *elastic.SearchResult, err error) {

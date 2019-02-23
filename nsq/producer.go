@@ -11,9 +11,9 @@ import (
 
 func Producerflow() {
 	config := nsq.NewConfig()
-	w, _ := nsq.NewProducer("xxxx.yy.com:1234", config)
+	w, _ := nsq.NewProducer("nothttp:30018", config)
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 2; i++ {
 		w.Publish("Topic_string", []byte(fmt.Sprintf("string%d", i)))
 	}
 
