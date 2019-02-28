@@ -26,7 +26,7 @@ func main() {
 	/*
 		https://github.com/go-redis/redis
 	*/
-	serverUrl := "wrer:6379"
+	serverUrl := "rerererewr.de:6379"
 	go redis.Testflow(serverUrl)
 
 	/*

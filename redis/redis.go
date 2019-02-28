@@ -36,9 +36,9 @@ func Testflow(url string) {
 	}
 	fmt.Println("key", val)
 
-	val2, err := client.Get("key2").Result()
+	val2, err := client.Get("key3").Result()
 	if err == redis.Nil {
-		fmt.Println("key2 does not exist")
+		fmt.Println("key2 does not exist:", val2)
 	} else if err != nil {
 		panic(err)
 	} else {
