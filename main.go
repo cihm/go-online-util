@@ -6,7 +6,8 @@ import (
 	//"go-online-util/facebook"
 	//"go-online-util/sendmail"
 	//"go-online-util/concurrent"
-	"go-online-util/redis"
+	//"go-online-util/redis"
+	go-online-util/ginapi"
 	"os"
 	"os/signal"
 	"syscall"
@@ -23,11 +24,19 @@ import (
 )
 
 func main() {
+
+	/*
+		https://studygolang.com/articles/11836
+		https://studygolang.com/articles/11836
+	*/
+	//serverUrl := "rerererewr.de:6379"
+	go ginapi.Mainflow()
+
 	/*
 		https://github.com/go-redis/redis
 	*/
-	serverUrl := "rerererewr.de:6379"
-	go redis.Testflow(serverUrl)
+	//serverUrl := "rerererewr.de:6379"
+	//go redis.Testflow(serverUrl)
 
 	/*
 		Elastic search example
