@@ -7,10 +7,12 @@ import (
 	//"go-online-util/sendmail"
 	//"go-online-util/concurrent"
 	//"go-online-util/redis"
-	go-online-util/ginapi"
+	//go-online-util/ginapi"
+	"go-online-util/jaeger"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 	//"go-online-util/redis"
 	//"go-online-util/listener"
 	//"go-online-util/cron"
@@ -26,11 +28,22 @@ import (
 func main() {
 
 	/*
+		https://github.com/yurishkuro/opentracing-tutorial/tree/master/go/lesson02
+	*/
+	samplingServerURL := "http://localhost:5778/sampling"
+	collectorEndpoint := "http://localhost:14268/api/traces"
+	//go testjaeger.Mainflow(samplingServerURL, collectorEndpoint)
+	go testjaeger.MainFormatflow(samplingServerURL, collectorEndpoint)
+	go testjaeger.MainPublishflow(samplingServerURL, collectorEndpoint)
+	time.Sleep(time.Second * 10)
+	go testjaeger.MainCompleteflow(samplingServerURL, collectorEndpoint)
+
+	/*
 		https://studygolang.com/articles/11836
 		https://studygolang.com/articles/11836
 	*/
 	//serverUrl := "rerererewr.de:6379"
-	go ginapi.Mainflow()
+	//go ginapi.Mainflow()
 
 	/*
 		https://github.com/go-redis/redis
