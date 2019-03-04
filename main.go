@@ -4,15 +4,14 @@ import (
 	//"go-online-util/rsa"
 	//"go-online-util/password"
 	//"go-online-util/facebook"
-	//"go-online-util/sendmail"
+	"go-online-util/sendmail"
 	//"go-online-util/concurrent"
 	//"go-online-util/redis"
 	//go-online-util/ginapi"
-	"go-online-util/jaeger"
+	//"go-online-util/jaeger"
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 	//"go-online-util/redis"
 	//"go-online-util/listener"
 	//"go-online-util/cron"
@@ -30,13 +29,14 @@ func main() {
 	/*
 		https://github.com/yurishkuro/opentracing-tutorial/tree/master/go/lesson02
 	*/
-	samplingServerURL := "http://localhost:5778/sampling"
-	collectorEndpoint := "http://localhost:14268/api/traces"
-	//go testjaeger.Mainflow(samplingServerURL, collectorEndpoint)
-	go testjaeger.MainFormatflow(samplingServerURL, collectorEndpoint)
-	go testjaeger.MainPublishflow(samplingServerURL, collectorEndpoint)
-	time.Sleep(time.Second * 10)
-	go testjaeger.MainCompleteflow(samplingServerURL, collectorEndpoint)
+	// samplingServerURL := "http://434243:5778/sampling"
+	// collectorEndpoint := "http://2423432.de:14268/api/traces"
+	// //go testjaeger.Mainflow(samplingServerURL, collectorEndpoint)
+	// go testjaeger.MainFormatflow(samplingServerURL, collectorEndpoint)
+	// go testjaeger.MainPublishflow(samplingServerURL, collectorEndpoint)
+	// time.Sleep(time.Second * 10)
+
+	// go testjaeger.MainCompleteflow(samplingServerURL, collectorEndpoint)
 
 	/*
 		https://studygolang.com/articles/11836
@@ -127,9 +127,9 @@ func main() {
 	/*
 		Send mail example
 	*/
-	// sender := sendmail.NewSender("lewisli.acer@gmail.com", "sds")
-	// bodyMessage := sendmail.WriteHTMLEmail(sendmail.Receiver, sendmail.Subject, sendmail.Message, sender)
-	// sender.SendMail(sendmail.Receiver, sendmail.Subject, bodyMessage)
+	sender := sendmail.NewSender("lewisli.acer@gmail.com", "hrjpforejp")
+	bodyMessage := sendmail.WriteHTMLEmail(sendmail.Receiver, sendmail.Subject, sendmail.Message, sender)
+	sender.SendMail(sendmail.Receiver, sendmail.Subject, bodyMessage)
 
 	// forever := make(chan bool)
 	// fmt.Println(" [*] Waiting for logs. To exit press CTRL+C")

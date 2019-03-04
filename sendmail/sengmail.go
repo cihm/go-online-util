@@ -67,7 +67,7 @@ func NewSender(Username, Password string) Sender {
 
 func (sender Sender) SendMail(Dest []string, Subject, bodyMessage string) {
 
-	msg := "From: " + sender.User + "\n" +
+	msg := "From: cihm <" + sender.User + ">\n" +
 		"To: " + strings.Join(Dest, ",") + "\n" +
 		"Subject: " + Subject + "\n" + bodyMessage
 

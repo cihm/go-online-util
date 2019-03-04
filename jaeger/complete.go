@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
@@ -28,23 +29,48 @@ SpanContext:
 */
 
 func MainCompleteflow(samplingServerURL, collectorEndpoint string) {
-	tracer, closer := InitJaeger("hello-world", samplingServerURL, collectorEndpoint)
-	defer closer.Close()
-	opentracing.SetGlobalTracer(tracer)
 
-	helloTo := "lewis success"
-	greeting := "lewis greeting"
+	interval := 5 * time.Second
+	go func() {
+		c := time.Tick(interval)
+		loop := true
+		for loop {
+			select {
+			case <-c:
 
-	span := tracer.StartSpan("say-hello")
-	span.SetTag("hello-to", helloTo)
-	span.SetBaggageItem("greeting", greeting)
-	defer closer.Close()
-	defer span.Finish()
+				tracer, closer := InitJaeger("hello-world", samplingServerURL, collectorEndpoint)
+				defer closer.Close()
+				opentracing.SetGlobalTracer(tracer)
 
-	ctx := opentracing.ContextWithSpan(context.Background(), span)
+				helloTo := "lewis success"
+				greeting := "lewis greeting"
 
-	helloStr := formatStringc(ctx, helloTo)
-	printHelloc(ctx, helloStr)
+				span := tracer.StartSpan("say-hello")
+				span.SetTag("hello-to", helloTo)
+				span.SetBaggageItem("greeting", greeting)
+				//defer closer.Close()
+
+				ctx := opentracing.ContextWithSpan(context.Background(), span)
+
+				helloStr := formatStringc(ctx, helloTo)
+				printHelloc(ctx, helloStr)
+				span.Finish()
+			}
+		}
+	}()
+
+	interval2 := 7 * time.Second
+	go func() {
+		c := time.Tick(interval2)
+		loop := true
+		for loop {
+			select {
+			case <-c:
+				go Mainflow(samplingServerURL, collectorEndpoint)
+
+			}
+		}
+	}()
 }
 
 func formatStringc(ctx context.Context, helloTo string) string {
