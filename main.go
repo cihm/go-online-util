@@ -4,11 +4,12 @@ import (
 	//"go-online-util/rsa"
 	//"go-online-util/password"
 	//"go-online-util/facebook"
-	"go-online-util/sendmail"
+	//"go-online-util/sendmail"
 	//"go-online-util/concurrent"
 	//"go-online-util/redis"
 	//go-online-util/ginapi"
 	//"go-online-util/jaeger"
+	"go-online-util/oop"
 	"os"
 	"os/signal"
 	"syscall"
@@ -25,12 +26,16 @@ import (
 )
 
 func main() {
+	/*
+		oop
+	*/
+	go oop.Flow()
 
 	/*
 		https://github.com/yurishkuro/opentracing-tutorial/tree/master/go/lesson02
 	*/
-	// samplingServerURL := "http://434243:5778/sampling"
-	// collectorEndpoint := "http://2423432.de:14268/api/traces"
+	// samplingServerURL := "http://speng8.3232.de:5778/sampling"
+	// collectorEndpoint := "http://speng8.3232.de:14268/api/traces"
 	// //go testjaeger.Mainflow(samplingServerURL, collectorEndpoint)
 	// go testjaeger.MainFormatflow(samplingServerURL, collectorEndpoint)
 	// go testjaeger.MainPublishflow(samplingServerURL, collectorEndpoint)
@@ -66,9 +71,9 @@ func main() {
 		//topic > channel
 		//topic can publish to multi channels
 	*/
-	// var aa, bb, dd int = 1, 2, 3
+	//var aa, bb, dd int = 1, 2, 3
 	// var a, b, d *int = &aa, &bb, &dd
-	// go nsqexample.Consumerflow(a)
+	//go nsqexample.Consumerflow(a)
 	// time.Sleep(time.Second * 2)
 	// go nsqexample.Consumerflow(b)
 	// time.Sleep(time.Second * 2)
@@ -127,9 +132,9 @@ func main() {
 	/*
 		Send mail example
 	*/
-	sender := sendmail.NewSender("lewisli.acer@gmail.com", "hrjpforejp")
-	bodyMessage := sendmail.WriteHTMLEmail(sendmail.Receiver, sendmail.Subject, sendmail.Message, sender)
-	sender.SendMail(sendmail.Receiver, sendmail.Subject, bodyMessage)
+	// sender := sendmail.NewSender("lewisli.acer@gmail.com", "sds")
+	// bodyMessage := sendmail.WriteHTMLEmail(sendmail.Receiver, sendmail.Subject, sendmail.Message, sender)
+	// sender.SendMail(sendmail.Receiver, sendmail.Subject, bodyMessage)
 
 	// forever := make(chan bool)
 	// fmt.Println(" [*] Waiting for logs. To exit press CTRL+C")
