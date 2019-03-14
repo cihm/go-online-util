@@ -9,7 +9,8 @@ import (
 	//"go-online-util/redis"
 	//go-online-util/ginapi"
 	//"go-online-util/jaeger"
-	"go-online-util/oop"
+	//"go-online-util/oop"
+	"go-online-util/designpattern"
 	"os"
 	"os/signal"
 	"syscall"
@@ -27,9 +28,15 @@ import (
 
 func main() {
 	/*
+		designpattern
+	*/
+	go designpattern.Proxyd()
+	go designpattern.Decorator()
+
+	/*
 		oop
 	*/
-	go oop.Flow()
+	//go oop.Flow()
 
 	/*
 		https://github.com/yurishkuro/opentracing-tutorial/tree/master/go/lesson02
