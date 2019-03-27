@@ -21,7 +21,7 @@ import (
 	https://serverfault.com/questions/635139/how-to-fix-send-mail-authorization-failed-534-5-7-14
 **/
 var (
-	SMTPServer  string
+	//SMTPServer  string
 	Receiver    []string
 	Subject     string
 	Message     string
@@ -32,9 +32,9 @@ func init() {
 	/**
 		Gmail SMTP Server
 	**/
-	SMTPServer = "smtp.gmail.com"
+	//SMTPServer = "smtp.gmail.com"
 	//The receiver needs to be in slice as the receive supports multiple receiver
-	Receiver = []string{"g1007125goodman@yahoo.com.tw", "g1007125goodman@gmail.com"}
+	Receiver = []string{"g1007125goodman@yahoo.com.tw"}
 
 	Subject = "Testing HTLML Email from golang"
 	Message = `
@@ -56,13 +56,14 @@ func init() {
 }
 
 type Sender struct {
-	User     string
-	Password string
+	User       string
+	Password   string
+	SMTPServer string
 }
 
-func NewSender(Username, Password string) Sender {
+func NewSender(Username, Password, SMTPServer string) Sender {
 
-	return Sender{Username, Password}
+	return Sender{Username, Password, SMTPServer}
 }
 
 func (sender Sender) SendMail(Dest []string, Subject, bodyMessage string) {
@@ -70,13 +71,12 @@ func (sender Sender) SendMail(Dest []string, Subject, bodyMessage string) {
 	msg := "From: cihm <" + sender.User + ">\n" +
 		"To: " + strings.Join(Dest, ",") + "\n" +
 		"Subject: " + Subject + "\n" + bodyMessage
-
-	err := smtp.SendMail(SMTPServer+":587",
-		smtp.PlainAuth("", sender.User, sender.Password, SMTPServer),
+	fmt.Println(msg)
+	err := smtp.SendMail(sender.SMTPServer+":587",
+		smtp.PlainAuth("", sender.User, sender.Password, sender.SMTPServer),
 		sender.User, Dest, []byte(msg))
 
 	if err != nil {
-
 		fmt.Printf("smtp error: %s", err)
 		return
 	}
@@ -87,7 +87,7 @@ func (sender Sender) SendMail(Dest []string, Subject, bodyMessage string) {
 func WriteEmail(dest []string, contentType, subject, bodyMessage string, sender Sender) string {
 
 	header := make(map[string]string)
-	header["From"] = sender.User
+	//header["From"] = sender.User
 
 	receipient := ""
 
@@ -95,8 +95,8 @@ func WriteEmail(dest []string, contentType, subject, bodyMessage string, sender 
 		receipient = receipient + user
 	}
 
-	header["To"] = receipient
-	//header["Subject"] = subject
+	//header["To"] = receipient
+	header["Subject"] = subject
 	header["MIME-Version"] = "1.0"
 	header["Content-Type"] = fmt.Sprintf("%s; charset=\"utf-8\"", contentType)
 	header["Content-Transfer-Encoding"] = "quoted-printable"

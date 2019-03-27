@@ -10,7 +10,9 @@ import (
 	//go-online-util/ginapi"
 	//"go-online-util/jaeger"
 	//"go-online-util/oop"
-	"go-online-util/designpattern"
+	//"go-online-util/designpattern"
+	//"go-online-util/gmail"
+	"go-online-util/minio"
 	"os"
 	"os/signal"
 	"syscall"
@@ -28,10 +30,23 @@ import (
 
 func main() {
 	/*
+		gmailclient
+	*/
+	serverUrl := "domainname:9000"
+	accessKeyID := "432432432432"
+	secretAccessKey := "zuf+34324345543dsgfreyt"
+	go minio.Flow(serverUrl, accessKeyID, secretAccessKey)
+
+	/*
+		gmailclient
+	*/
+	//go gmailclient.Flow()
+
+	/*
 		designpattern
 	*/
-	go designpattern.Proxyd()
-	go designpattern.Decorator()
+	//go designpattern.Proxyd()
+	//go designpattern.Decorator()
 
 	/*
 		oop
@@ -139,9 +154,11 @@ func main() {
 	/*
 		Send mail example
 	*/
-	// sender := sendmail.NewSender("lewisli.acer@gmail.com", "sds")
+	//寄送不到yahoo
+	// sender := sendmail.NewSender("tretretre@sina.com", "tretretre!", "smtp.sina.com")
 	// bodyMessage := sendmail.WriteHTMLEmail(sendmail.Receiver, sendmail.Subject, sendmail.Message, sender)
 	// sender.SendMail(sendmail.Receiver, sendmail.Subject, bodyMessage)
+	//sendmail.SendSina()
 
 	// forever := make(chan bool)
 	// fmt.Println(" [*] Waiting for logs. To exit press CTRL+C")
